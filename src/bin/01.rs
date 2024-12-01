@@ -13,8 +13,8 @@ fn parse_input(input: &str) -> (Vec<u32>, Vec<u32>) {
 
 pub fn part_one(input: &str) -> Option<u32> {
     let (mut left, mut right) = parse_input(input);
-    left.sort();
-    right.sort();
+    left.sort_unstable();
+    right.sort_unstable();
     let mut sum = 0;
     for (l, r) in left.iter().zip(right.iter()) {
         sum += l.abs_diff(*r);
@@ -24,7 +24,7 @@ pub fn part_one(input: &str) -> Option<u32> {
 
 pub fn part_two(input: &str) -> Option<u32> {
     let (left, right) = parse_input(input);
-    let mut right_freq: std::collections::HashMap<u32, u32> = std::collections::HashMap::new();
+    let mut right_freq = std::collections::HashMap::new();
     for r in right {
         *right_freq.entry(r).or_insert(0) += 1;
     }
